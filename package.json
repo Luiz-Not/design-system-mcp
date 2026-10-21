@@ -1,0 +1,23 @@
+{
+  "name": "design-system-mcp",
+  "version": "0.1.0",
+  "description": "Servidor MCP que expõe um design system para agentes de IA",
+  "type": "module",
+  "bin": { "design-system-mcp": "dist/index.js" },
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "node --import tsx --test test/*.test.ts",
+    "inspect": "npx @modelcontextprotocol/inspector tsx src/index.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "^2.0.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "tsx": "^4",
+    "typescript": "^5"
+  }
+}

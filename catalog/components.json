@@ -1,0 +1,149 @@
+{
+  "name": "Cacau DS",
+  "package": "@cacau/ui",
+  "components": [
+    {
+      "name": "Button",
+      "category": "ações",
+      "description": "Botão para ações. Use 'primary' para a ação principal da tela (no máximo uma por tela), 'secondary' para ações alternativas e 'ghost' em barras de ferramentas.",
+      "keywords": ["botão", "ação", "cta", "submit", "clique"],
+      "props": [
+        { "name": "variant", "type": "'primary' | 'secondary' | 'ghost' | 'danger'", "required": false, "default": "'primary'", "description": "Estilo visual." },
+        { "name": "size", "type": "'sm' | 'md' | 'lg'", "required": false, "default": "'md'", "description": "Tamanho." },
+        { "name": "loading", "type": "boolean", "required": false, "default": "false", "description": "Mostra spinner e desabilita o clique." },
+        { "name": "icon", "type": "IconName", "required": false, "description": "Ícone à esquerda do texto." },
+        { "name": "onClick", "type": "() => void", "required": false, "description": "Handler de clique." }
+      ],
+      "examples": ["<Button variant=\"primary\" onClick={save}>Salvar</Button>", "<Button variant=\"danger\" icon=\"trash\">Excluir</Button>"],
+      "a11y": "Botões só com ícone precisam de aria-label."
+    },
+    {
+      "name": "TextField",
+      "category": "formulários",
+      "description": "Campo de texto com label, texto de ajuda e mensagem de erro integrados.",
+      "keywords": ["input", "campo", "texto", "formulário", "email", "senha"],
+      "props": [
+        { "name": "label", "type": "string", "required": true, "description": "Rótulo visível do campo." },
+        { "name": "value", "type": "string", "required": true, "description": "Valor controlado." },
+        { "name": "onChange", "type": "(value: string) => void", "required": true, "description": "Recebe o novo valor (não o evento)." },
+        { "name": "type", "type": "'text' | 'email' | 'password' | 'number'", "required": false, "default": "'text'", "description": "Tipo do input." },
+        { "name": "helperText", "type": "string", "required": false, "description": "Texto de ajuda abaixo do campo." },
+        { "name": "error", "type": "string", "required": false, "description": "Mensagem de erro; deixa o campo em estado inválido." }
+      ],
+      "examples": ["<TextField label=\"E-mail\" type=\"email\" value={email} onChange={setEmail} />"],
+      "a11y": "O label é obrigatório; não use placeholder como substituto."
+    },
+    {
+      "name": "Select",
+      "category": "formulários",
+      "description": "Lista de opções para escolha única. Para até 4 opções, prefira RadioGroup.",
+      "keywords": ["dropdown", "seleção", "opções", "combo"],
+      "props": [
+        { "name": "label", "type": "string", "required": true, "description": "Rótulo visível." },
+        { "name": "options", "type": "Array<{ value: string; label: string }>", "required": true, "description": "Opções disponíveis." },
+        { "name": "value", "type": "string", "required": true, "description": "Valor selecionado." },
+        { "name": "onChange", "type": "(value: string) => void", "required": true, "description": "Recebe o novo valor." }
+      ],
+      "examples": ["<Select label=\"Estado\" options={estados} value={uf} onChange={setUf} />"]
+    },
+    {
+      "name": "Card",
+      "category": "layout",
+      "description": "Superfície que agrupa conteúdo relacionado. Pode ter título, ações no cabeçalho e rodapé.",
+      "keywords": ["cartão", "container", "painel", "caixa"],
+      "props": [
+        { "name": "title", "type": "string", "required": false, "description": "Título do card." },
+        { "name": "actions", "type": "ReactNode", "required": false, "description": "Ações no canto superior direito." },
+        { "name": "footer", "type": "ReactNode", "required": false, "description": "Conteúdo do rodapé." },
+        { "name": "padding", "type": "'none' | 'sm' | 'md' | 'lg'", "required": false, "default": "'md'", "description": "Espaçamento interno." }
+      ],
+      "examples": ["<Card title=\"Resumo do frete\" footer={<Button>Confirmar</Button>}>...</Card>"]
+    },
+    {
+      "name": "Stack",
+      "category": "layout",
+      "description": "Empilha filhos com espaçamento consistente usando os tokens de spacing. Use no lugar de margens manuais.",
+      "keywords": ["layout", "espaçamento", "flex", "coluna", "linha", "grid"],
+      "props": [
+        { "name": "direction", "type": "'row' | 'column'", "required": false, "default": "'column'", "description": "Direção." },
+        { "name": "gap", "type": "SpacingToken", "required": false, "default": "'md'", "description": "Espaço entre filhos (token)." },
+        { "name": "align", "type": "'start' | 'center' | 'end' | 'stretch'", "required": false, "default": "'stretch'", "description": "Alinhamento no eixo cruzado." }
+      ],
+      "examples": ["<Stack direction=\"row\" gap=\"sm\"><Button>Cancelar</Button><Button>Salvar</Button></Stack>"]
+    },
+    {
+      "name": "Modal",
+      "category": "sobreposições",
+      "description": "Diálogo modal para confirmações e formulários curtos. Para fluxos longos, use uma página.",
+      "keywords": ["dialog", "diálogo", "popup", "confirmação", "janela"],
+      "props": [
+        { "name": "open", "type": "boolean", "required": true, "description": "Controla a visibilidade." },
+        { "name": "onClose", "type": "() => void", "required": true, "description": "Chamado ao fechar (Esc, overlay ou botão)." },
+        { "name": "title", "type": "string", "required": true, "description": "Título, também usado como nome acessível." },
+        { "name": "footer", "type": "ReactNode", "required": false, "description": "Ações do modal." }
+      ],
+      "examples": ["<Modal open={open} onClose={close} title=\"Cancelar frete?\" footer={<Button variant=\"danger\">Cancelar frete</Button>}>Esta ação não pode ser desfeita.</Modal>"],
+      "a11y": "O foco fica preso no modal e volta ao elemento de origem ao fechar."
+    },
+    {
+      "name": "Toast",
+      "category": "feedback",
+      "description": "Notificação temporária disparada pelo hook useToast(). Não é renderizado diretamente.",
+      "keywords": ["notificação", "snackbar", "alerta", "mensagem", "sucesso", "erro"],
+      "props": [
+        { "name": "tone", "type": "'success' | 'error' | 'info'", "required": true, "description": "Tom da mensagem." },
+        { "name": "message", "type": "string", "required": true, "description": "Texto curto." }
+      ],
+      "examples": ["const toast = useToast();\ntoast({ tone: 'success', message: 'Frete salvo' });"]
+    },
+    {
+      "name": "Badge",
+      "category": "exibição de dados",
+      "description": "Rótulo curto para status ou contagem.",
+      "keywords": ["status", "tag", "etiqueta", "chip", "contador"],
+      "props": [
+        { "name": "tone", "type": "'neutral' | 'success' | 'warning' | 'danger' | 'info'", "required": false, "default": "'neutral'", "description": "Cor semântica." }
+      ],
+      "examples": ["<Badge tone=\"success\">Entregue</Badge>"]
+    },
+    {
+      "name": "DataTable",
+      "category": "exibição de dados",
+      "description": "Tabela com ordenação, paginação e estado vazio. Para listas simples em mobile, prefira Card em Stack.",
+      "keywords": ["tabela", "lista", "grid", "dados", "paginação"],
+      "props": [
+        { "name": "columns", "type": "Array<{ key: string; header: string; sortable?: boolean; render?: (row) => ReactNode }>", "required": true, "description": "Definição das colunas." },
+        { "name": "rows", "type": "Array<Record<string, unknown>>", "required": true, "description": "Dados." },
+        { "name": "emptyState", "type": "ReactNode", "required": false, "description": "Conteúdo quando não há linhas." },
+        { "name": "pageSize", "type": "number", "required": false, "default": "20", "description": "Linhas por página." }
+      ],
+      "examples": ["<DataTable columns={cols} rows={fretes} emptyState=\"Nenhum frete encontrado\" />"]
+    },
+    {
+      "name": "Tabs",
+      "category": "navegação",
+      "description": "Alterna entre visões relacionadas no mesmo contexto.",
+      "keywords": ["abas", "navegação", "seções"],
+      "props": [
+        { "name": "items", "type": "Array<{ id: string; label: string }>", "required": true, "description": "Abas." },
+        { "name": "value", "type": "string", "required": true, "description": "Aba ativa." },
+        { "name": "onChange", "type": "(id: string) => void", "required": true, "description": "Troca de aba." }
+      ],
+      "examples": ["<Tabs items={[{ id: 'ativos', label: 'Ativos' }, { id: 'historico', label: 'Histórico' }]} value={tab} onChange={setTab} />"]
+    }
+  ],
+  "tokens": {
+    "color": {
+      "primary": "#8a4b1f",
+      "surface": "#ffffff",
+      "text": "#1d1b18",
+      "muted": "#6b665e",
+      "success": "#067647",
+      "warning": "#b54708",
+      "danger": "#b42318"
+    },
+    "spacing": { "xs": "4px", "sm": "8px", "md": "16px", "lg": "24px", "xl": "40px" },
+    "radius": { "sm": "6px", "md": "10px", "full": "999px" },
+    "font": { "family": "Inter, system-ui, sans-serif", "size": { "sm": "14px", "md": "16px", "lg": "20px", "xl": "28px" } }
+  }
+}
